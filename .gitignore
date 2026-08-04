@@ -1,0 +1,35 @@
+# --- Python (backend) ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Env / secrets ---
+.env
+.env.*
+!.env.example
+
+# --- Node / Next.js (web) ---
+web/node_modules/
+web/.next/
+web/out/
+web/.env*.local
+node_modules/
+
+# --- OS / editor ---
+.DS_Store
+*.swp
+
+# --- Logs ---
+*.log
+logs/
+
+# --- Internal planning docs (not part of the deliverable repo) ---
+SRS.md
+CURSOR_BUILD_PLAN.md
+CURSOR_INSTRUCTIONS.md
+DEV_LOG.md
