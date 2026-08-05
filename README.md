@@ -2,7 +2,9 @@
 
 Multi-turn conversational agent for Trendly (D2C fashion) customer support: order status, returns/exchange eligibility, policy Q&A, and escalation to a human.
 
-> **Status:** backend through Phase 5 (agent loop + CLI). API wiring, frontend, and deploy follow in later phases.
+> **Status:** backend through Phase 7 (`POST /chat`, `/health`, Railway). Frontend chat UI is Phase 9.
+
+**Live backend:** https://trendly-production.up.railway.app
 
 ## Layout
 
@@ -31,9 +33,25 @@ cp .env.example .env   # set ANTHROPIC_API_KEY
 python -m app.cli
 python -m app.cli -m "where is TR-4525?" --trace
 
-# FastAPI skeleton
+# FastAPI (CORS uses FRONTEND_ORIGIN from .env)
 uvicorn app.main:app --reload
+
+# Smoke-check
+curl http://127.0.0.1:8000/health
+curl -X POST http://127.0.0.1:8000/chat \
+  -H 'Content-Type: application/json' \
+  -d '{"session_id":"demo-1","message":"Where is TR-4525?"}'
 
 # Tests
 pytest
 ```
+
+## Railway
+
+Start command (also in `railway.toml` / `Procfile`):
+
+```text
+uvicorn app.main:app --host 0.0.0.0 --port $PORT
+```
+
+Set service variables: `ANTHROPIC_API_KEY`, `FRONTEND_ORIGIN`.

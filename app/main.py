@@ -1,14 +1,21 @@
-"""Trendly Agentic Support Assistant — FastAPI application entrypoint.
+"""Trendly FastAPI app — /chat, /health, CORS (SRS §5.1, NFR-5, NFR-6)."""
 
-Scaffolded in Phase 0 (see CURSOR_BUILD_PLAN.md). This is deliberately a
-skeleton: the `POST /chat` and `GET /health` routes, CORS configuration, and
-the wiring to `app.agent` are added in Phase 7 ("API wiring", SRS §5.1), once
-the data layer, eligibility engine, tools, and agent loop exist.
+from __future__ import annotations
 
-SRS refs: §3.1, §3.2
-"""
+import logging
+import os
 
+from dotenv import load_dotenv
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from app.agent.loop import run_turn
+from app.api_models import ChatRequest, ChatResponse, SessionStateView
+from app.turn_log import log_turn
+
+load_dotenv()
+
+logging.basicConfig(level=logging.INFO, format="%(message)s")
 
 app = FastAPI(
     title="Trendly Support Assistant",
@@ -16,3 +23,34 @@ app = FastAPI(
     "eligibility, policy Q&A, and escalation.",
     version="0.1.0",
 )
+
+_frontend = os.environ.get("FRONTEND_ORIGIN", "http://localhost:3000")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[_frontend],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+@app.get("/health")
+def health() -> dict[str, str]:
+    return {"status": "ok"}
+
+
+@app.post("/chat", response_model=ChatResponse)
+def chat(body: ChatRequest) -> ChatResponse:
+    result = run_turn(body.session_id, body.message)
+    state = result["state"]
+    log_turn(
+        body.session_id,
+        trace=result["trace"],
+        escalated=bool(state.get("escalated")),
+    )
+    return ChatResponse(
+        session_id=body.session_id,
+        reply=result["reply"],
+        state=SessionStateView(**state),
+        trace=result["trace"],
+    )
