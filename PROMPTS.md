@@ -83,3 +83,34 @@ status matrix before any CLI Done-when check can pass.
 FR-3.1/3.2/3.4 so every policy claim is traceable; encodes FR-1.5/1.8 so the
 ₹250 credit is offered only through `issue_delay_credit` after a real delay,
 never from model date math — the Done-when gap between TR-4525 and TR-4521.
+
+---
+
+## 2026-08-05 — Delayed-order reply order (empathy before credit)
+
+**Trigger:** Live CLI on TR-4525 opened with "Good news! I've issued a ₹250
+store credit…" — credit was correct, but FR-1.5 requires acknowledging the
+delay with empathy *before* quoting policy / offering the credit.
+
+**Before:**
+> - Delayed (only when tools show the delay threshold is met): acknowledge the
+> delay with empathy *before* quoting policy, then proactively offer the §1.5
+> ₹250 store credit via `issue_delay_credit` (FR-1.5). Do not offer that credit
+> from your own reading of dates — only after `lookup_order` and only by
+> calling `issue_delay_credit`, which re-checks the business-day threshold
+> (FR-1.8, P2). If the tool refuses (`threshold_not_met`), do not offer it.
+
+**After:**
+> - Delayed (only when `lookup_order` status is `delayed`, or
+> `issue_delay_credit` succeeds): FR-1.5 reply order is mandatory —
+> (1) open by acknowledging the delay with empathy (sorry it's late / we know
+> this is frustrating); (2) then call `search_policy` for delayed-order credit
+> and cite §1.5; (3) then proactively call `issue_delay_credit` and tell them
+> about the ₹250 credit. Never open with "good news" or lead with the credit.
+> Do not offer that credit from your own reading of dates — only via
+> `issue_delay_credit` (FR-1.8, P2). If the tool refuses (`threshold_not_met`),
+> do not offer it.
+
+**Why this fixes it:** Makes the FR-1.5 sequence an explicit numbered reply
+shape and bans leading with the credit, so TR-4525 opens on empathy rather
+than a celebratory credit announcement.
