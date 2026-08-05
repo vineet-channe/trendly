@@ -271,3 +271,22 @@ eligibility `clause_ids` without a same-turn `search_policy` call.
 **Why this fixes it:** The tool schema is what the model reads when choosing
 tools; repeating the P1 rule next to `check_eligibility` reduces the
 eligibility-without-retrieval grounding miss.
+
+---
+
+## 2026-08-05 — Phase 11 close-out
+
+**Trigger:** Phase 11 docs. No further prompt edits planned before the demo
+video; freeze the revision log so reviewers have a complete history.
+
+**Before:**
+> *(unchanged — `app/agent/prompts.py` was not edited in this phase)*
+
+**After:**
+> *(unchanged — `app/agent/prompts.py` was not edited in this phase)*
+
+**Why this fixes it:** Closes the log. The seven prior entries are the full
+prompt history: initial system prompt → delayed-order empathy order → tiered
+disclosure → FR-6 refusals → injection/COD harden → P1 search_policy before
+citing eligibility clause_ids → check_eligibility schema wording. Readers
+should treat `prompts.py` as frozen unless a new failure forces an entry.
