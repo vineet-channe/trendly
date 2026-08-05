@@ -1,30 +1,34 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f4f7f6;
-  --foreground: #1a2220;
-  --ink: #1a2220;
-  --muted: #5c6b66;
-  --border: #d5e0dc;
-  --surface: #eef3f1;
-  --accent: #0f6b63;
-  --accent-soft: #d4ebe7;
-  --code-bg: #e8efec;
+  --background: #f3f4f2;
+  --foreground: #141816;
+  --ink: #141816;
+  --muted: #5a6560;
+  --border: #d4dbd6;
+  --surface: #e9eeea;
+  --accent: #1f4f42;
+  --accent-soft: #d5e6df;
+  --code-bg: #e4ebe7;
+  --paper: #fafaf8;
+  --mist: #c8ddd4;
+  --font-display: var(--font-fraunces);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-manrope);
+  --font-mono: var(--font-ibm-plex-mono);
+  --font-display: var(--font-fraunces);
 }
 
 body {
   background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, #d9ebe7 0%, transparent 55%),
-    linear-gradient(180deg, #f7faf9 0%, var(--background) 40%);
+    radial-gradient(ellipse 90% 55% at 50% -15%, var(--mist) 0%, transparent 58%),
+    linear-gradient(180deg, #f7f8f5 0%, var(--background) 42%);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
 }
 
 @keyframes message-in {
@@ -38,12 +42,37 @@ body {
   }
 }
 
+@keyframes empty-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .message-enter {
   animation: message-in 0.28s ease-out;
 }
 
+.empty-enter {
+  animation: empty-in 0.4s ease-out;
+}
+
 .trace-panel {
   transition: background-color 0.2s ease;
+}
+
+.composer-field {
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.font-display {
+  font-family: var(--font-fraunces), ui-serif, Georgia, serif;
 }
 
 .sr-only {

@@ -42,7 +42,7 @@ export default function Composer({ disabled, onSend }: Props) {
         onChange={(e) => setText(e.target.value)}
         onKeyDown={onKeyDown}
         placeholder="Ask about an order, return, or policy…"
-        className="max-h-32 min-h-[44px] flex-1 resize-none rounded-xl border border-[var(--border)] bg-white px-3.5 py-2.5 text-[15px] text-[var(--ink)] outline-none placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)] disabled:opacity-60"
+        className="composer-field max-h-32 min-h-[44px] flex-1 resize-none rounded-xl border border-[var(--border)] bg-[var(--paper)] px-3.5 py-2.5 text-[15px] text-[var(--ink)] outline-none placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:shadow-[0_0_0_3px_var(--accent-soft)] disabled:opacity-60"
       />
       <button
         type="submit"

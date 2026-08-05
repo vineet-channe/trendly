@@ -97,10 +97,10 @@ export default function Chat() {
 
   return (
     <div className="flex h-dvh flex-col">
-      <header className="shrink-0 border-b border-[var(--border)] bg-white/70 px-4 py-3 backdrop-blur-sm">
+      <header className="shrink-0 border-b border-[var(--border)]/80 bg-[var(--paper)]/75 px-4 py-3.5 backdrop-blur-sm">
         <div className="mx-auto flex max-w-2xl items-center justify-between gap-3">
           <div>
-            <h1 className="text-lg font-semibold tracking-tight text-[var(--ink)]">
+            <h1 className="font-display text-xl font-medium tracking-tight text-[var(--ink)]">
               Trendly
             </h1>
             <p className="text-xs text-[var(--muted)]">Support assistant</p>
@@ -108,7 +108,7 @@ export default function Chat() {
           <button
             type="button"
             onClick={resetSession}
-            className="rounded-lg border border-[var(--border)] px-2.5 py-1.5 text-xs text-[var(--muted)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            className="rounded-md border border-transparent px-2.5 py-1.5 text-xs text-[var(--muted)] transition-colors hover:border-[var(--border)] hover:text-[var(--ink)]"
           >
             New conversation
           </button>
@@ -116,7 +116,7 @@ export default function Chat() {
       </header>
 
       <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col overflow-hidden px-4">
-        <div className="flex-1 space-y-3 overflow-y-auto py-4">
+        <div className="flex-1 space-y-4 overflow-y-auto py-5">
           {messages.length === 0 && !pending && (
             <EmptyState onPick={handleSend} />
           )}
@@ -132,7 +132,7 @@ export default function Chat() {
         </div>
 
         <StatusStrip state={state} error={error} />
-        <div className="shrink-0 pb-4 pt-1">
+        <div className="shrink-0 pb-5 pt-1">
           <Composer disabled={pending || !sessionId} onSend={handleSend} />
         </div>
       </div>

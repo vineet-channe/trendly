@@ -11,7 +11,7 @@ export default function StatusStrip({ state, error }: Props) {
   return (
     <>
       {state?.escalated && (
-        <div className="mb-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">
+        <div className="mb-2 rounded-lg border border-[#e6d9b8] bg-[#f7f1e4] px-3 py-2 text-xs text-[#5c4e2a]">
           This conversation was handed to a human specialist.
         </div>
       )}
@@ -20,7 +20,7 @@ export default function StatusStrip({ state, error }: Props) {
           <span>
             Order:{" "}
             <span className="font-medium text-[var(--ink)]">
-              {state.active_order ?? "—"}
+              {state.active_order ?? "none"}
             </span>
           </span>
           <span>
@@ -32,7 +32,7 @@ export default function StatusStrip({ state, error }: Props) {
         </div>
       )}
       {error && (
-        <p className="mb-2 text-xs text-red-600" role="alert">
+        <p className="mb-2 text-xs text-[#9b3b3b]" role="alert">
           {error}
         </p>
       )}

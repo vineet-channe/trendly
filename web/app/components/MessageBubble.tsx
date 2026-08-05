@@ -20,7 +20,7 @@ export default function MessageBubble({ message }: Props) {
         className={`max-w-[85%] sm:max-w-[75%] ${
           isUser
             ? "rounded-2xl rounded-br-md bg-[var(--accent)] px-4 py-2.5 text-white"
-            : "rounded-2xl rounded-bl-md bg-white/90 px-4 py-2.5 text-[var(--ink)] shadow-sm ring-1 ring-[var(--border)]"
+            : "rounded-2xl rounded-bl-md bg-[var(--paper)] px-4 py-2.5 text-[var(--ink)] shadow-[0_1px_2px_rgba(20,24,22,0.04)] ring-1 ring-[var(--border)]"
         }`}
       >
         {isUser ? (

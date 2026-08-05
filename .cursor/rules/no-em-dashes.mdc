@@ -1,0 +1,25 @@
+---
+description: Never use em dashes in agent responses
+alwaysApply: true
+---
+
+# No Em Dashes in Responses
+
+Never use em dashes (—) in any agent response, explanation, commit message, PR description, or other written output to the user.
+
+## Prefer instead
+
+- Commas
+- Periods / separate sentences
+- Colons
+- Parentheses
+- Hyphens (-) only when grammatically appropriate for compounds
+
+## Examples
+
+Bad: The API failed — check the logs.
+Good: The API failed. Check the logs.
+Good: The API failed: check the logs.
+Good: The API failed (check the logs).
+
+Do not replace an em dash with a double hyphen (--) as a workaround. Rewrite the sentence so no dash is needed.

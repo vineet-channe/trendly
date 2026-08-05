@@ -14,11 +14,11 @@ export default function TracePanel({ trace }: Props) {
   const tools = trace.map((t) => t.tool);
 
   return (
-    <details className="trace-panel group mt-2 rounded-lg border border-[var(--border)] bg-[var(--surface)] open:bg-white/70">
+    <details className="trace-panel group mt-2.5 rounded-lg border border-[var(--border)] bg-[var(--surface)]/70 open:bg-[var(--paper)]">
       <summary className="flex cursor-pointer list-none items-center gap-2 px-3 py-2 text-xs text-[var(--muted)] [&::-webkit-details-marker]:hidden">
         <span
           aria-hidden
-          className="inline-block text-[10px] transition-transform group-open:rotate-90"
+          className="inline-block text-[10px] transition-transform duration-200 group-open:rotate-90"
         >
           ▶
         </span>
@@ -29,7 +29,7 @@ export default function TracePanel({ trace }: Props) {
             {clauses.map((id) => (
               <span
                 key={id}
-                className="rounded bg-[var(--accent-soft)] px-1.5 py-0.5 font-mono text-[10px] text-[var(--accent)]"
+                className="rounded-md bg-[var(--accent-soft)] px-1.5 py-0.5 font-mono text-[10px] text-[var(--accent)]"
               >
                 §{id}
               </span>
