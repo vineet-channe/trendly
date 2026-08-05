@@ -1,5 +1,9 @@
 # Trendly — Agentic Support Assistant
 
+<p align="center">
+  <img src="assets/trendly-logo.png" alt="Trendly" width="280" />
+</p>
+
 Multi-turn conversational agent for Trendly (D2C fashion) customer support: order status, returns/exchange eligibility, policy Q&A, and escalation to a human.
 
 **Live backend:** https://trendly-production.up.railway.app  
