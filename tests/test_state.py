@@ -2,8 +2,8 @@
 
 import pytest
 
-import session_store
-from state import AUTO_ESCALATE_ERROR_THRESHOLD, SessionState
+import app.session.store as session_store
+from app.session.state import AUTO_ESCALATE_ERROR_THRESHOLD, SessionState
 
 
 @pytest.fixture(autouse=True)

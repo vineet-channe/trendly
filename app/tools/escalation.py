@@ -12,10 +12,10 @@ from __future__ import annotations
 
 from typing import Any, Optional
 
-from dates import business_days_since
-from order_store import get_customer, get_order
-from tool_actions import _mock_reference
-from windows import DELAY_THRESHOLD_BUSINESS_DAYS, is_delayed
+from app.dates import business_days_since
+from app.orders.store import get_customer, get_order
+from app.tools.actions import _mock_reference
+from app.eligibility.windows import DELAY_THRESHOLD_BUSINESS_DAYS, is_delayed
 
 SUPPORT_HOURS_NOTE = "Trendly support hours: 9:00 AM-9:00 PM IST, seven days a week."
 ESCALATION_REASONS = (

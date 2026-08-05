@@ -5,8 +5,8 @@ point of putting them in code is that the quoted ETA can't drift from the
 policy the customer could read themselves.
 """
 
-import order_store
-from refunds import INSPECTION_WINDOW, refund_route
+import app.orders.store as order_store
+from app.eligibility.refunds import INSPECTION_WINDOW, refund_route
 
 
 def test_card_route_matches_policy_table():

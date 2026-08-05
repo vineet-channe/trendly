@@ -2,7 +2,7 @@
 
 import json
 
-import order_store
+import app.orders.store as order_store
 
 
 def _all_values(obj):

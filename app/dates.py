@@ -13,7 +13,7 @@ around real holidays.
 from datetime import date, datetime, timedelta, timezone
 from typing import Union
 
-from config import now
+from app.config import now
 
 DateLike = Union[date, datetime, str]
 

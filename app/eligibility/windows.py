@@ -15,7 +15,7 @@ from __future__ import annotations
 
 from typing import Any, Optional
 
-from dates import business_days_since, calendar_days_since, hours_since
+from app.dates import business_days_since, calendar_days_since, hours_since
 
 # §1.5 — "more than 3 business days past its expected delivery date".
 DELAY_THRESHOLD_BUSINESS_DAYS = 3

@@ -28,11 +28,11 @@ from __future__ import annotations
 
 from typing import Any, Optional
 
-import verdicts as v
-from eligibility_steps import damage_verdict, eligible_verdict, order_state_verdict
-from order_store import get_order
-from verdicts import category_of, is_non_returnable, verdict
-from windows import check_return_window
+import app.eligibility.verdicts as v
+from app.eligibility.steps import damage_verdict, eligible_verdict, order_state_verdict
+from app.orders.store import get_order
+from app.eligibility.verdicts import category_of, is_non_returnable, verdict
+from app.eligibility.windows import check_return_window
 
 INTENTS = ("return", "exchange_size", "exchange_other", "damage_claim")
 

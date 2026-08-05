@@ -16,7 +16,7 @@ from __future__ import annotations
 
 from typing import Optional
 
-from state import SessionState
+from app.session.state import SessionState
 
 
 class SessionStore:

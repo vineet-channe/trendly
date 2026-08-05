@@ -7,8 +7,8 @@ not delayed and the ₹250 credit is not authorised for it (FR-6.1).
 
 from datetime import date, datetime
 
-import order_store
-from windows import check_damage_window, check_return_window, is_delayed
+import app.orders.store as order_store
+from app.eligibility.windows import check_damage_window, check_return_window, is_delayed
 
 
 def _expected(order_id):

@@ -7,7 +7,12 @@ codebase must go through instead of calling `datetime.now()` directly
 """
 
 from datetime import datetime
+from pathlib import Path
 from typing import Callable, Optional
+
+# Repo root (parent of the `app/` package) — data files stay at `data/`.
+REPO_ROOT = Path(__file__).resolve().parent.parent
+DATA_DIR = REPO_ROOT / "data"
 
 # NFR-1: Sonnet-class model for quality on guardrail and grounding behaviour.
 # Drop to a Haiku-class model only if trial-credit quota forces it; actual

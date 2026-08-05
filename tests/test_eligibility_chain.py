@@ -9,9 +9,9 @@ is non-returnable (§2.3), and telling that customer their 30 days ran out
 Clock frozen at 2026-08-04 (SRS §4.1) via the `reference_clock` fixture.
 """
 
-import order_store
-import policy_index
-from eligibility import check_eligibility
+import app.orders.store as order_store
+import app.policy.index as policy_index
+from app.eligibility.engine import check_eligibility
 
 
 def _one(order_id, sku=None, intent="return"):

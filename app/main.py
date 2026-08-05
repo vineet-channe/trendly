@@ -2,7 +2,7 @@
 
 Scaffolded in Phase 0 (see CURSOR_BUILD_PLAN.md). This is deliberately a
 skeleton: the `POST /chat` and `GET /health` routes, CORS configuration, and
-the wiring to `agent.py` are added in Phase 6 ("API wiring", SRS §5.1), once
+the wiring to `app.agent` are added in Phase 7 ("API wiring", SRS §5.1), once
 the data layer, eligibility engine, tools, and agent loop exist.
 
 SRS refs: §3.1, §3.2

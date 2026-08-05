@@ -11,8 +11,8 @@ part of the chain most likely to be "simplified" into a bug later:
 
 from datetime import datetime
 
-import eligibility
-from eligibility import check_eligibility
+import app.eligibility.engine as eligibility
+from app.eligibility.engine import check_eligibility
 
 # Item copied from TR-4525 (Court Sneakers). The dataset has no *delivered*
 # footwear order — TR-4525 is `delayed` — so §2.5 is unreachable through

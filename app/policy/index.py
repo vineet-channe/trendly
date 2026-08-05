@@ -18,10 +18,11 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-from pathlib import Path
 from typing import Any, Optional
 
-POLICY_PATH = Path(__file__).resolve().parent / "data" / "trendly_policy.md"
+from app.config import DATA_DIR
+
+POLICY_PATH = DATA_DIR / "trendly_policy.md"
 
 _SECTION_RE = re.compile(r"^##\s+(\d+)\.\s+(.+?)\s*$")
 _CLAUSE_RE = re.compile(r"^\*\*(\d+\.\d+)\s+(.+?)\.?\*\*\s*(.*)$")

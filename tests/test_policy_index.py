@@ -1,7 +1,7 @@
 """Phase 1 tests for the policy clause parser and keyword search (P1, P7)."""
 
-import policy_index
-from policy_search import search_policy
+import app.policy.index as policy_index
+from app.policy.search import search_policy
 
 
 def test_all_expected_clause_ids_present():

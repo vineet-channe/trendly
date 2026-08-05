@@ -10,7 +10,7 @@ from datetime import datetime
 
 import pytest
 
-import config
+import app.config as config
 
 # The instant the SRS §4.1 status matrix was verified against the dataset.
 REFERENCE_NOW = datetime(2026, 8, 4, 12, 0, 0)

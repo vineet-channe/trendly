@@ -8,8 +8,8 @@ feature depends on actually works before anything is built on top of it.
 
 from datetime import date, datetime
 
-import config
-import dates
+import app.config as config
+import app.dates as dates
 
 
 def test_now_can_be_overridden_and_restored():

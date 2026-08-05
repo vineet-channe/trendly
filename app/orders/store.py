@@ -14,10 +14,11 @@ rather than a fuzzy/partial match onto a real order.
 from __future__ import annotations
 
 import json
-from pathlib import Path
 from typing import Any, Optional
 
-DATA_PATH = Path(__file__).resolve().parent / "data" / "orders.json"
+from app.config import DATA_DIR
+
+DATA_PATH = DATA_DIR / "orders.json"
 
 _NOTE_KEY = "_note_for_designers"
 

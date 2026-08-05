@@ -21,13 +21,13 @@ from __future__ import annotations
 
 from typing import Any, Callable, Optional
 
-from action_tool_schemas import ACTION_TOOL_SCHEMAS
-from eligibility import check_eligibility as _check_eligibility
-from escalation_actions import escalate_to_human, issue_delay_credit
-from order_store import get_order
-from policy_search import search_policy as _search_policy
-from tool_actions import initiate_return
-from tool_schemas import READ_TOOL_SCHEMAS
+from app.tools.action_schemas import ACTION_TOOL_SCHEMAS
+from app.eligibility.engine import check_eligibility as _check_eligibility
+from app.tools.escalation import escalate_to_human, issue_delay_credit
+from app.orders.store import get_order
+from app.policy.search import search_policy as _search_policy
+from app.tools.actions import initiate_return
+from app.tools.schemas import READ_TOOL_SCHEMAS
 
 __all__ = [
     "TOOL_SCHEMAS", "TOOL_REGISTRY", "lookup_order", "search_policy",

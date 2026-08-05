@@ -16,10 +16,10 @@ from __future__ import annotations
 
 from typing import Any, Optional
 
-import verdicts as v
-from refunds import refund_route
-from verdicts import category_of, is_non_returnable, verdict
-from windows import check_damage_window
+import app.eligibility.verdicts as v
+from app.eligibility.refunds import refund_route
+from app.eligibility.verdicts import category_of, is_non_returnable, verdict
+from app.eligibility.windows import check_damage_window
 
 
 def order_state_verdict(

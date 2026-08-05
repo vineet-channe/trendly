@@ -11,7 +11,7 @@ from __future__ import annotations
 import hashlib
 from typing import Any
 
-from eligibility import check_eligibility
+from app.eligibility.engine import check_eligibility
 
 
 def _mock_reference(prefix: str, *parts: str) -> str:

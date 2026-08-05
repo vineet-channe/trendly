@@ -14,7 +14,7 @@ import re
 from collections import Counter
 from typing import Any
 
-from policy_index import Clause, clause_index, get_clauses
+from app.policy.index import Clause, clause_index, get_clauses
 
 # Generic filler words stripped before scoring, so a paraphrase like "can I
 # get my money back" reduces to its one content word ("money") instead of

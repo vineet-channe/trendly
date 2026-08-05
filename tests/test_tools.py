@@ -5,7 +5,7 @@ Uses the shared `reference_clock` fixture (2026-08-04) from `conftest.py` so
 delay/eligibility results match the SRS §4.1 status matrix.
 """
 
-import tools
+import app.tools.registry as tools
 
 
 def test_lookup_order_valid():
