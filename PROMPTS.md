@@ -214,3 +214,60 @@ details in chat (FR-4.5).
 actionable rather than a vague trigger list, and treats embedded override /
 fake-policy claims as data so the agent cannot be talked into a 60-day window
 or ignoring grounding rules (FR-6.5).
+
+---
+
+## 2026-08-05 — Require search_policy even when eligibility returns clause_ids (P1)
+
+**Trigger:** Phase 10 live harness — returns/eligibility turns cited §2.1 / §2.3 /
+§2.4 / §6.2 from `check_eligibility` output alone; turn traces had
+`lookup_order` + `check_eligibility` but no `search_policy`, failing the
+suite-wide P1 grounding assertion.
+
+**Before:**
+> - The clause index below is titles only. Call `search_policy` before any
+> policy claim (FR-3.1). Cite clause IDs like §2.3 in the reply (FR-3.2).
+>
+> - Eligibility is per line item via `check_eligibility` (P3). Act with
+> `initiate_return` only after an eligible verdict and Tier-1 verification.
+
+**After:**
+> - The clause index below is titles only. Call `search_policy` before any
+> policy claim (FR-3.1). Cite clause IDs like §2.3 in the reply (FR-3.2).
+> - `check_eligibility` returns clause_ids as machine labels only. Before you
+> cite any § ID in the customer reply — including those labels — you must
+> still call `search_policy` (by query or clause ID) in the same turn. Citing
+> from eligibility alone is a grounding failure (P1).
+>
+> - Eligibility is per line item via `check_eligibility` (P3). After the
+> verdict, call `search_policy` for the cited clause IDs before explaining
+> them to the customer. Act with `initiate_return` only after an eligible
+> verdict and Tier-1 verification.
+>
+> *(also: when not delayed, do not volunteer the ₹250 figure; include order
+> ID in lost-parcel handoff replies)*
+
+**Why this fixes it:** Eligibility clause_ids are deterministic labels, not
+retrieved policy text. P1 / FR-3.1 require every customer-facing policy claim
+to originate from `search_policy` so the turn trace can verify grounding —
+including after `check_eligibility`.
+
+---
+
+## 2026-08-05 — check_eligibility schema: clause_ids are not retrieved text (P1)
+
+**Trigger:** Phase 10 live harness flaked on TR-4530 when the model cited
+eligibility `clause_ids` without a same-turn `search_policy` call.
+
+**Before** (`app/tools/schemas.py` check_eligibility description):
+> Each verdict carries the exact clause IDs and reasons behind it (FR-4.2, P4);
+> never restate or soften the reason yourself.
+
+**After:**
+> Each verdict carries clause_ids as machine labels only (FR-4.2, P4) — before
+> citing any § ID to the customer you must still call `search_policy` in the
+> same turn (P1, FR-3.1). Never restate or soften the reason.
+
+**Why this fixes it:** The tool schema is what the model reads when choosing
+tools; repeating the P1 rule next to `check_eligibility` reduces the
+eligibility-without-retrieval grounding miss.

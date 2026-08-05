@@ -71,8 +71,9 @@ READ_TOOL_SCHEMAS: list[dict[str, Any]] = [
             "purely in code (FR-4, P2). Omitting `sku` returns one verdict "
             "per line item, required for mixed orders (P3, FR-4.1) — never "
             "collapse a mixed order into one verdict. Each verdict carries "
-            "the exact clause IDs and reasons behind it (FR-4.2, P4); never "
-            "restate or soften the reason yourself."
+            "clause_ids as machine labels only (FR-4.2, P4) — before citing "
+            "any § ID to the customer you must still call `search_policy` "
+            "in the same turn (P1, FR-3.1). Never restate or soften the reason."
         ),
         "input_schema": {
             "type": "object",
