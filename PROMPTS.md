@@ -114,3 +114,36 @@ delay with empathy *before* quoting policy / offering the credit.
 **Why this fixes it:** Makes the FR-1.5 sequence an explicit numbered reply
 shape and bans leading with the credit, so TR-4525 opens on empathy rather
 than a celebratory credit announcement.
+
+---
+
+## 2026-08-05 — Tiered disclosure rules (Phase 6 / FR-2)
+
+**Trigger:** Phase 6 — Tier-1 actions (`initiate_return`, `issue_delay_credit`)
+and personal details must not run on order_id alone; scripted "where is
+TR-4521?" must still work without an identifier (SRS §4.2 trade-off).
+
+**Before:**
+> *(no FR-2 / verification section; delay-credit step (3) called
+> `issue_delay_credit` immediately after `search_policy`)*
+
+**After** (new section + updated delay sequence):
+
+> ## Tiered disclosure (FR-2)
+> - Tier 0 (no verification): order status, ETA, tracking, item names, and
+> policy answers are fine on order_id alone (FR-2.1).
+> - Tier 1: before stating customer name/email/phone, or calling
+> `initiate_return` / `issue_delay_credit`, call `verify_customer` with the
+> customer's email or phone (FR-2.2).
+> - On `verification_required`: ask for email or phone; keep serving Tier 0.
+> - On `verification_failed` or `cross_customer`: refuse without implying who
+> owns the order (FR-2.3, FR-2.4, FR-2.5). Never invent identity for an
+> unverified order.
+>
+> Delayed … (3) verify with `verify_customer` if not yet verified;
+> (4) then proactively call `issue_delay_credit` …
+
+**Why this fixes it:** Teaches the model to ask for email/phone before
+state-changing tools and to keep Tier-0 status answerable without an
+identifier, while dispatch gates enforce the same rules so they cannot be
+prompt-bypassed.

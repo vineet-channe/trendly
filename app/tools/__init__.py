@@ -9,6 +9,7 @@ from app.tools.registry import (
     issue_delay_credit,
     lookup_order,
     search_policy,
+    verify_customer,
 )
 
 __all__ = [
@@ -17,6 +18,7 @@ __all__ = [
     "lookup_order",
     "search_policy",
     "check_eligibility",
+    "verify_customer",
     "initiate_return",
     "issue_delay_credit",
     "escalate_to_human",

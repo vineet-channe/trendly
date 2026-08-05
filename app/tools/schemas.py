@@ -91,4 +91,33 @@ READ_TOOL_SCHEMAS: list[dict[str, Any]] = [
             "required": ["order_id"],
         },
     },
+    {
+        "name": "verify_customer",
+        "description": (
+            "Verify the caller's identity with the email or phone on their "
+            "account before Tier-1 disclosure or state-changing actions "
+            "(FR-2.2). Call this before initiate_return, issue_delay_credit, "
+            "or stating customer name/email/phone. Optional order_id also "
+            "checks that the contact owns that order. Failures never reveal "
+            "who owns an order (FR-2.3, FR-2.5)."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description": "Email address to match against the customer record.",
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "Phone number to match against the customer record.",
+                },
+                "order_id": {
+                    "type": "string",
+                    "description": "Optional order ID — contact must own this order.",
+                },
+            },
+            "required": [],
+        },
+    },
 ]

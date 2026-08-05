@@ -28,11 +28,12 @@ from app.orders.store import get_order
 from app.policy.search import search_policy as _search_policy
 from app.tools.actions import initiate_return
 from app.tools.schemas import READ_TOOL_SCHEMAS
+from app.tools.verify import verify_customer
 
 __all__ = [
     "TOOL_SCHEMAS", "TOOL_REGISTRY", "lookup_order", "search_policy",
     "check_eligibility", "initiate_return", "issue_delay_credit",
-    "escalate_to_human",
+    "escalate_to_human", "verify_customer",
 ]
 
 # The single list `agent.py` (Phase 5) passes to the Anthropic SDK's
@@ -75,6 +76,7 @@ TOOL_REGISTRY: dict[str, Callable[..., dict[str, Any]]] = {
     "lookup_order": lookup_order,
     "search_policy": search_policy,
     "check_eligibility": check_eligibility,
+    "verify_customer": verify_customer,
     "initiate_return": initiate_return,
     "issue_delay_credit": issue_delay_credit,
     "escalate_to_human": escalate_to_human,

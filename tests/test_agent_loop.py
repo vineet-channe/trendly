@@ -75,6 +75,13 @@ def test_two_consecutive_unrecoverable_errors_auto_escalate():
 
 def test_repeat_exchange_escalates(reference_clock):
     state = get_session("s-ex")
+    # TR-4528 belongs to C-103 — Tier-1 initiate_return needs verification (FR-2.2).
+    verify = execute_tool(
+        "verify_customer",
+        {"email": "diego.ramos@example.com", "order_id": "TR-4528"},
+        state,
+    )
+    assert verify.get("verified") is True
     sku = "TR-SHR-009"  # TR-4528 final-sale → size exchange only
     first = execute_tool(
         "initiate_return",
