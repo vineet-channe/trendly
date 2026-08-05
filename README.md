@@ -3,7 +3,7 @@
 Multi-turn conversational agent for Trendly (D2C fashion) customer support: order status, returns/exchange eligibility, policy Q&A, and escalation to a human.
 
 **Live backend:** https://trendly-production.up.railway.app  
-**Live frontend:** *(add after Railway `trendly-web` service is deployed — typically `https://trendly-web-production.up.railway.app`)*
+**Live frontend:** https://trendly-web-production.up.railway.app
 
 ## Layout
 
