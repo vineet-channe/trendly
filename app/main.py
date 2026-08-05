@@ -24,10 +24,15 @@ app = FastAPI(
     version="0.1.0",
 )
 
-_frontend = os.environ.get("FRONTEND_ORIGIN", "http://localhost:3000")
+# Comma-separated so localhost and the live frontend can both work (Phase 9).
+_origins = [
+    o.strip()
+    for o in os.environ.get("FRONTEND_ORIGIN", "http://localhost:3000").split(",")
+    if o.strip()
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[_frontend],
+    allow_origins=_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

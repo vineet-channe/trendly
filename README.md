@@ -2,9 +2,8 @@
 
 Multi-turn conversational agent for Trendly (D2C fashion) customer support: order status, returns/exchange eligibility, policy Q&A, and escalation to a human.
 
-> **Status:** backend through Phase 7 (`POST /chat`, `/health`, Railway). Frontend chat UI is Phase 9.
-
-**Live backend:** https://trendly-production.up.railway.app
+**Live backend:** https://trendly-production.up.railway.app  
+**Live frontend:** *(add after Railway `trendly-web` service is deployed — typically `https://trendly-web-production.up.railway.app`)*
 
 ## Layout
 
@@ -18,7 +17,7 @@ app/
   orders/         Read-only orders.json loader
   session/        In-memory SessionState store
 data/             Fixed dataset (orders.json, trendly_policy.md) — read-only
-web/              Next.js chat UI
+web/              Next.js chat UI (message list + collapsible tool trace)
 tests/            Unit tests + (later) scripted conversation harness
 ```
 
@@ -36,7 +35,13 @@ python -m app.cli -m "where is TR-4525?" --trace
 # FastAPI (CORS uses FRONTEND_ORIGIN from .env)
 uvicorn app.main:app --reload
 
-# Smoke-check
+# Frontend
+cd web
+cp .env.example .env.local   # NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
+npm install
+npm run dev                  # http://localhost:3000
+
+# Smoke-check API
 curl http://127.0.0.1:8000/health
 curl -X POST http://127.0.0.1:8000/chat \
   -H 'Content-Type: application/json' \
@@ -46,12 +51,25 @@ curl -X POST http://127.0.0.1:8000/chat \
 pytest
 ```
 
-## Railway
+## Railway (two services, one repo)
 
-Start command (also in `railway.toml` / `Procfile`):
+| Service | Root directory | Public URL role |
+|---|---|---|
+| Backend | repo root | FastAPI `/health`, `/chat` |
+| Frontend (`trendly-web`) | `web` | Next.js chat UI |
+
+**Backend env:** `ANTHROPIC_API_KEY`, `FRONTEND_ORIGIN` (comma-separated, e.g. `https://trendly-web-production.up.railway.app,http://localhost:3000`)
+
+**Frontend env (set before first build):** `NEXT_PUBLIC_API_BASE_URL=https://trendly-production.up.railway.app`
+
+Backend start command (`railway.toml` / `Procfile` at repo root):
 
 ```text
 uvicorn app.main:app --host 0.0.0.0 --port $PORT
 ```
 
-Set service variables: `ANTHROPIC_API_KEY`, `FRONTEND_ORIGIN`.
+Frontend start command (`web/railway.toml`):
+
+```text
+npx next start -H 0.0.0.0 -p $PORT
+```
